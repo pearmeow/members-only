@@ -1,14 +1,8 @@
 const pool = require("./pool");
 
 async function getAllPosts() {
-    const { rows } = await pool.query("SELECT * FROM posts");
-    return rows;
-}
-
-async function getNameFromUsername(username) {
     const { rows } = await pool.query(
-        "SELECT firstName, lastName FROM users WHERE username = $1",
-        [username],
+        "SELECT * FROM posts JOIN users ON posts.username = users.username",
     );
     return rows;
 }
@@ -55,7 +49,6 @@ async function deletePost(id) {
 
 module.exports = {
     getAllPosts,
-    getNameFromUsername,
     createUser,
     createPost,
     updateUser,
