@@ -7,6 +7,14 @@ async function getAllPosts() {
     return rows;
 }
 
+async function getUser(username) {
+    const { rows } = await pool.query(
+        "SELECT * FROM users WHERE username = $1",
+        [username],
+    );
+    return rows;
+}
+
 async function createUser(
     username,
     firstName,
@@ -53,4 +61,5 @@ module.exports = {
     createPost,
     updateUser,
     deletePost,
+    getUser,
 };
