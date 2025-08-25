@@ -6,22 +6,22 @@ require("dotenv").config();
 
 // Sample sql, change to fit database
 const SQL = `
-CREATE TABLE IF NOT EXISTS messages (
-  id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  msg VARCHAR ( 255 ),
-  author VARCHAR ( 255 ),
-  date DATE
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS posts;
+
+CREATE TABLE users(
+    username VARCHAR(64) PRIMARY KEY,
+    firstName VARCHAR(64) NOT NULL, lastName VARCHAR(64) NOT NULL, password VARCHAR(255) NOT NULL,
+    isMember BOOL DEFAULT FALSE,
+    isAdmin BOOL DEFAULT FALSE
 );
 
-INSERT INTO messages (msg, author, date) 
-VALUES
-  ('Meow', 'Mahdi', '1983-10-20');
-INSERT INTO messages (msg, author, date) 
-VALUES
-  ('Help me', 'Ivan', '2000-12-20');
-INSERT INTO messages (msg, author, date) 
-VALUES
-  ('Hello', 'Perry', '1953-12-20');
+CREATE TABLE posts(
+    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    username VARCHAR(64) REFERENCES users(username),
+    text VARCHAR(255) NOT NULL,
+    date TIMESTAMP NOT NULL
+);
 `;
 
 DB_URL =
