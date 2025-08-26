@@ -15,10 +15,10 @@ async function getUser(username) {
     return rows;
 }
 
-async function createUser(username, firstName, lastName, password) {
+async function createUser(username, firstname, lastname, password) {
     await pool.query(
-        "INSERT INTO users (username, firstName, lastName, password) VALUES($1, $2, $3, $4)",
-        [username, firstName, lastName, password],
+        "INSERT INTO users (username, firstname, lastname, password) VALUES($1, $2, $3, $4)",
+        [username, firstname, lastname, password],
     );
 }
 
@@ -29,16 +29,16 @@ async function createPost(username, text) {
     );
 }
 
-async function updateUser(username, isMember, isAdmin) {
-    if (isMember) {
+async function updateUser(username, ismember, isadmin) {
+    if (ismember) {
         await pool.query(
-            "UPDATE users SET isMember = true WHERE username = $1",
+            "UPDATE users SET ismember = true WHERE username = $1",
             [username],
         );
     }
-    if (isAdmin) {
+    if (isadmin) {
         await pool.query(
-            "UPDATE users SET isAdmin = true WHERE username = $1",
+            "UPDATE users SET isadmin = true WHERE username = $1",
             [username],
         );
     }

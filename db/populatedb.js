@@ -11,11 +11,11 @@ DROP TABLE IF EXISTS users;
 
 CREATE TABLE users(
     username VARCHAR(64) PRIMARY KEY,
-    firstName VARCHAR(64) NOT NULL,
-    lastName VARCHAR(64) NOT NULL,
+    firstname VARCHAR(64) NOT NULL,
+    lastname VARCHAR(64) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    isMember BOOL DEFAULT FALSE NOT NULL,
-    isAdmin BOOL DEFAULT FALSE NOT NULL
+    ismember BOOL DEFAULT FALSE NOT NULL,
+    isadmin BOOL DEFAULT FALSE NOT NULL
 );
 
 CREATE TABLE posts(
