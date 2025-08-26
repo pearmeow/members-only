@@ -9,6 +9,7 @@ const getPosts = async (req, res) => {
 };
 
 const validatePost = body("text")
+    .trim()
     .isLength({ min: 1, max: 255 })
     .withMessage("Post must be between 1 and 255 characters long");
 
