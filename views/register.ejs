@@ -3,11 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><% title %></title>
+    <title><%= title %></title>
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <h1><% title %></h1>
-    <p>This page is a work in progress</p>
+    <h1><%= title %></h1>
+    <%- include("./partials/errors.ejs", {errors: errors}) %>
+    <form action="/register" method="POST">
+        <label for="username">Username</label>
+        <input id="username" name="username" type="text">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="text">
+        <label for="firstName">First Name</label>
+        <input id="firstName" name="firstName" type="text">
+        <label for="lastName">Last Name</label>
+        <input id="lastName" name="lastName" type="text">
+        <button type="submit">Submit</button>
+    </form>
+    <a href="/">Back to home</a>
 </body>
 </html>
