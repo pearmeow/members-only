@@ -11,7 +11,7 @@ passport.use(
             if (!user) {
                 return done(null, false, { message: "Username doesn't exist" });
             }
-            if (!validPassword(password, user.password)) {
+            if (!(await validPassword(password, user.password))) {
                 return done(null, false, { message: "Password is wrong" });
             }
             return done(null, user);
