@@ -23,7 +23,10 @@ const createPost = [
     async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty() || !res.locals.currentUser) {
-            return res.render("index", { errors: errors.array() });
+            return res.render("create", {
+                title: "Create Post",
+                errors: errors.array(),
+            });
         }
         const text = matchedData(req).text;
         db.createPost(res.locals.currentUser.username, text);
