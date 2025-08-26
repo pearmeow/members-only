@@ -1,0 +1,31 @@
+const { body, validationResult, matchedData } = require("express-validator");
+const db = require("../db/queries.js");
+
+const getPosts = async (req, res) => {
+    const posts = await db.getAllPosts();
+    return res.render("index", {
+        posts: posts,
+    });
+};
+
+const validatePost = body("text")
+    .isLength({ min: 1, max: 255 })
+    .withMessage("Post must be between 1 and 255 characters long");
+
+const createPost = [
+    validatePost,
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.render("index", { errors: errors.array() });
+        }
+        const text = matchedData(req).text;
+        db.createPost(req.username, text);
+        res.redirect("/");
+    },
+];
+
+module.exports = {
+    getPosts,
+    createPost,
+};
