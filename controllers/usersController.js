@@ -27,9 +27,14 @@ const validateUser = [
         .isLength({ min: 1, max: 64 })
         .withMessage("Last name must be between 1 and 64 characters long"),
     body("password")
-        .trim()
         .isLength({ min: 1, max: 255 })
         .withMessage("Password must be between 1 and 255 characters long")
+        .custom(async (password) => {
+            if (/\ /.test(password)) {
+                throw new Error("No spaces allowed in password");
+            }
+            return password;
+        })
         .custom(async (password, { req }) => {
             if (password !== req.body.confirmpassword) {
                 throw new Error("Passwords don't match");
