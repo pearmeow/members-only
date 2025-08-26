@@ -10,7 +10,14 @@ const validateUser = [
     body("username")
         .trim()
         .isLength({ min: 1, max: 64 })
-        .withMessage("Username must be between 1 and 64 characters long"),
+        .withMessage("Username must be between 1 and 64 characters long")
+        .custom(async (user) => {
+            const rows = await db.getUser(user);
+            if (rows.length > 0) {
+                throw new Error("Username is already in use");
+            }
+        })
+        .withMessage("Username is in use"),
     body("firstname")
         .trim()
         .isLength({ min: 1, max: 64 })
