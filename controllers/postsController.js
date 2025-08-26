@@ -4,6 +4,7 @@ const db = require("../db/queries.js");
 const getPosts = async (req, res) => {
     const posts = await db.getAllPosts();
     return res.render("index", {
+        title: "posts",
         posts: posts,
     });
 };
