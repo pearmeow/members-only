@@ -46,4 +46,8 @@ const getLogin = (req, res) => {
     res.render("login", { errors: [] });
 };
 
-module.exports = {};
+module.exports = {
+    getLogin,
+    getRegister,
+    postRegister,
+};
