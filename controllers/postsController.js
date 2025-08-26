@@ -4,7 +4,7 @@ const db = require("../db/queries.js");
 const getPosts = async (req, res) => {
     const posts = await db.getAllPosts();
     return res.render("index", {
-        title: "posts",
+        title: "Posts",
         posts: posts,
     });
 };
@@ -22,7 +22,7 @@ const createPost = [
     validatePost,
     async (req, res) => {
         const errors = validationResult(req);
-        if (!errors.isEmpty()) {
+        if (!errors.isEmpty() || !res.locals.currentUser) {
             return res.render("index", { errors: errors.array() });
         }
         const text = matchedData(req).text;

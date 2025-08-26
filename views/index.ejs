@@ -25,13 +25,13 @@
             <% } %>
         </div>
     <% }) %>
-    <a href="/create">Create post</a>
-    <a href="/register">Register</a>
     <% if (locals.currentUser) { %>
+        <a href="/create">Create post</a>
         <a href="/logout">Log out</a>
         <a href="/member">Become a member!</a>
         <a href="/admin">Apply for admin</a>
     <% } else { %>
+        <a href="/register">Register</a>
         <a href="/login">Log in</a>
     <% } %>
 </body>
