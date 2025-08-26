@@ -31,8 +31,16 @@ const createPost = [
     },
 ];
 
+const deletePost = (req, res) => {
+    if (res.locals.currentUser && res.locals.currentUser.isadmin) {
+        db.deletePost(req.body.id);
+    }
+    res.redirect("/");
+};
+
 module.exports = {
     getPosts,
     getCreatePost,
     createPost,
+    deletePost,
 };
