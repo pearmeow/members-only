@@ -50,8 +50,18 @@ const getLogin = (req, res) => {
     res.render("login", { title: "Log in", errors: [] });
 };
 
+const getLogout = (req, res, next) => {
+    req.logout((err) => {
+        if (err) {
+            return next(err);
+        }
+        res.redirect("/");
+    });
+};
+
 module.exports = {
     getLogin,
+    getLogout,
     getRegister,
     postRegister,
 };
