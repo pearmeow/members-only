@@ -3,11 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><% title %></title>
+    <title><%= title %></title>
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <h1><% title %></h1>
-    <p>This page is a work in progress</p>
+    <h1><%= title %></h1>
+    <% posts.forEach((post) => { %>
+        <div class="card">
+            <% if (locals.currentUser && locals.currentUser.isMember) { %>
+                <p>Author: <%= post.username %></p>
+            <% } else { %>
+                <p>Author: ****** </p>
+            <% } %>
+            <p><%= post.text %></p>
+            <p><%= post.date %></p>
+        </div>
+    <% }) %>
+    <a href="/create">Create post</a>
+    <a href="/register">Register</a>
+    <% if (locals.currentUser) { %>
+        <a href="/logout">Log out</a>
+        <a href="/member">Become a member!</a>
+        <a href="/admin">Apply for admin</a>
+    <% } else { %>
+        <a href="/login">Log in</a>
+    <% } %>
 </body>
 </html>
