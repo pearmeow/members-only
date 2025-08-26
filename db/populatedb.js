@@ -11,7 +11,9 @@ DROP TABLE IF EXISTS posts;
 
 CREATE TABLE users(
     username VARCHAR(64) PRIMARY KEY,
-    firstName VARCHAR(64) NOT NULL, lastName VARCHAR(64) NOT NULL, password VARCHAR(255) NOT NULL,
+    firstName VARCHAR(64) NOT NULL,
+    lastName VARCHAR(64) NOT NULL,
+    password VARCHAR(255) NOT NULL,
     isMember BOOL DEFAULT FALSE,
     isAdmin BOOL DEFAULT FALSE
 );
