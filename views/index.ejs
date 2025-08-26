@@ -10,13 +10,19 @@
     <h1><%= title %></h1>
     <% posts.forEach((post) => { %>
         <div class="card">
-            <% if (locals.currentUser && locals.currentUser.isMember) { %>
+            <% if (locals.currentUser && locals.currentUser.ismember) { %>
                 <p>Author: <%= post.username %></p>
+                <p>Date posted: <%= post.date %></p>
             <% } else { %>
                 <p>Author: ****** </p>
+                <p>Date posted: ****** </p>
             <% } %>
             <p><%= post.text %></p>
-            <p><%= post.date %></p>
+            <% if (locals.currentUser && locals.currentUser.isadmin) { %>
+                <form action="/delete" method="post">
+                    <button name="id" value="<%=post.id%>" type="submit">Delete</button>
+                </form>
+            <% } %>
         </div>
     <% }) %>
     <a href="/create">Create post</a>
