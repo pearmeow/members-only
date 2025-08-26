@@ -29,7 +29,13 @@ const validateUser = [
     body("password")
         .trim()
         .isLength({ min: 1, max: 255 })
-        .withMessage("Password must be between 1 and 255 characters long"),
+        .withMessage("Password must be between 1 and 255 characters long")
+        .custom(async (password, { req }) => {
+            if (password !== req.body.confirmpassword) {
+                throw new Error("Passwords don't match");
+            }
+            return password;
+        }),
 ];
 
 const postRegister = [
