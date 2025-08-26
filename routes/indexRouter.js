@@ -13,11 +13,20 @@ indexRouter.post(
         successRedirect: "/",
     }),
 );
+
+indexRouter.get("/member", usersController.getMember);
+indexRouter.post("/member", usersController.postMember);
+
 indexRouter.get("/register", usersController.getRegister);
 indexRouter.post("/register", usersController.postRegister);
 
 indexRouter.get("/create", postsController.getCreatePost);
 indexRouter.post("/create", postsController.createPost);
+
+indexRouter.post("/delete", postsController.deletePost);
+
+indexRouter.get("/admin", usersController.getAdmin);
+indexRouter.post("/admin", usersController.postAdmin);
 
 indexRouter.get("/", postsController.getPosts);
 indexRouter.get("/{*splat}", (req, res) => {
