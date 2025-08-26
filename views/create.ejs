@@ -11,8 +11,10 @@
     <%- include("./partials/errors.ejs", {errors: errors}) %>
     <% if (locals.currentUser) { %>
         <form action="/create" method="POST">
-            <label for="text">Text</label>
-            <textarea id="text" name="text"></textarea>
+            <div class="postText">
+                <label for="text">Post text</label>
+                <textarea id="text" name="text"></textarea>
+            </div>
             <button type="submit">Submit</button>
         </form>
     <% } else { %>
