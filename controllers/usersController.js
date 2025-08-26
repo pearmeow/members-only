@@ -11,11 +11,11 @@ const validateUser = [
         .trim()
         .isLength({ min: 1, max: 64 })
         .withMessage("Username must be between 1 and 64 characters long"),
-    body("firstName")
+    body("firstname")
         .trim()
         .isLength({ min: 1, max: 64 })
         .withMessage("First name must be between 1 and 64 characters long"),
-    body("lastName")
+    body("lastname")
         .trim()
         .isLength({ min: 1, max: 64 })
         .withMessage("Last name must be between 1 and 64 characters long"),
@@ -38,11 +38,11 @@ const postRegister = [
         const results = matchedData(req);
         await db.createUser(
             results.username,
-            results.firstName,
-            results.lastName,
+            results.firstname,
+            results.lastname,
             await makePassword(results.password),
         );
-        res.redirect("/login");
+        res.redirect("/");
     },
 ];
 
@@ -59,9 +59,45 @@ const getLogout = (req, res, next) => {
     });
 };
 
+const getMember = (req, res) => {
+    res.render("member", { title: "Become a member", errors: [] });
+};
+
+const postMember = async (req, res) => {
+    if (req.body.code === "cats_are_cool") {
+        await db.updateUser(res.locals.currentUser.username, true, false);
+        res.redirect("/");
+    } else {
+        res.render("member", {
+            title: "Become a member",
+            errors: [{ msg: "Wrong code!" }],
+        });
+    }
+};
+
+const getAdmin = (req, res) => {
+    res.render("admin", { title: "Become an admin", errors: [] });
+};
+
+const postAdmin = async (req, res) => {
+    if (req.body.code === "sekiroshadowsdietwice") {
+        await db.updateUser(res.locals.currentUser.username, false, true);
+        res.redirect("/");
+    } else {
+        res.render("admin", {
+            title: "Become an admin",
+            errors: [{ msg: "Hesitation is defeat!" }],
+        });
+    }
+};
+
 module.exports = {
     getLogin,
     getLogout,
     getRegister,
     postRegister,
+    getMember,
+    postMember,
+    getAdmin,
+    postAdmin,
 };
