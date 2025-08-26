@@ -15,6 +15,12 @@ app.use(expressSession);
 app.use(passport.session());
 app.use(express.urlencoded({ extended: true })); // make post work and have a body
 
+app.use((req, res, next) => {
+    // make currentUser available in views
+    res.locals.currentUser = req.user;
+    next();
+});
+
 app.use("/", indexRouter);
 
 const PORT = 3000;
