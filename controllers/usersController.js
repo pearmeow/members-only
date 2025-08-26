@@ -1,8 +1,9 @@
 const { body, validationResult, matchedData } = require("express-validator");
+const { makePassword } = require("../utils/authenticate");
 const db = require("../db/queries.js");
 
 const getRegister = (req, res) => {
-    res.render("register", { errors: [] });
+    res.render("register", { title: "Register", errors: [] });
 };
 
 const validateUser = [
@@ -29,21 +30,24 @@ const postRegister = [
     async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.render("register", { errors: errors.array() });
+            return res.render("register", {
+                title: "Register",
+                errors: errors.array(),
+            });
         }
         const results = matchedData(req);
         await db.createUser(
             results.username,
             results.firstName,
             results.lastName,
-            results.password,
+            await makePassword(results.password),
         );
         res.redirect("/login");
     },
 ];
 
 const getLogin = (req, res) => {
-    res.render("login", { errors: [] });
+    res.render("login", { title: "Log in", errors: [] });
 };
 
 module.exports = {
