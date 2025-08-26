@@ -15,17 +15,10 @@ async function getUser(username) {
     return rows;
 }
 
-async function createUser(
-    username,
-    firstName,
-    lastName,
-    password,
-    isMember,
-    isAdmin,
-) {
+async function createUser(username, firstName, lastName, password) {
     await pool.query(
-        "INSERT INTO users (username, firstName, lastName, password, isMember, isAdmin) VALUES($1, $2, $3, $4, $5, $6)",
-        [username, firstName, lastName, password, isMember, isAdmin],
+        "INSERT INTO users (username, firstName, lastName, password) VALUES($1, $2, $3, $4)",
+        [username, firstName, lastName, password],
     );
 }
 

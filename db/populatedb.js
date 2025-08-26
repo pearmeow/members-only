@@ -6,16 +6,16 @@ require("dotenv").config();
 
 // Sample sql, change to fit database
 const SQL = `
-DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS posts;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE users(
     username VARCHAR(64) PRIMARY KEY,
     firstName VARCHAR(64) NOT NULL,
     lastName VARCHAR(64) NOT NULL,
     password VARCHAR(255) NOT NULL,
-    isMember BOOL DEFAULT FALSE,
-    isAdmin BOOL DEFAULT FALSE
+    isMember BOOL DEFAULT FALSE NOT NULL,
+    isAdmin BOOL DEFAULT FALSE NOT NULL
 );
 
 CREATE TABLE posts(
