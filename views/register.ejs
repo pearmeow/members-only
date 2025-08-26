@@ -10,18 +10,30 @@
     <h1><%= title %></h1>
     <%- include("./partials/errors.ejs", {errors: errors}) %>
     <form action="/register" method="POST">
-        <label for="username">Username</label>
-        <input id="username" name="username" type="text">
-        <label for="password">Password</label>
-        <input id="password" name="password" type="password">
-        <label for="confirmpassword">Confirm Password</label>
-        <input id="confirmpassword" name="confirmpassword" type="password">
-        <label for="firstname">First Name</label>
-        <input id="firstname" name="firstname" type="text">
-        <label for="lastname">Last Name</label>
-        <input id="lastname" name="lastname" type="text">
+        <p>
+            <label for="username">Username</label>
+            <input id="username" name="username" type="text">
+        </p>
+        <p>
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password">
+        </p>
+        <p>
+            <label for="confirmpassword">Confirm Password</label>
+            <input id="confirmpassword" name="confirmpassword" type="password">
+        </p>
+        <p>
+            <label for="firstname">First Name</label>
+            <input id="firstname" name="firstname" type="text">
+        </p>
+        <p>
+            <label for="lastname">Last Name</label>
+            <input id="lastname" name="lastname" type="text">
+        </p>
         <button type="submit">Submit</button>
     </form>
-    <a href="/">Back to home</a>
+    <div class="links">
+        <a href="/">Back to home</a>
+    <div>
 </body>
 </html>

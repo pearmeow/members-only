@@ -12,9 +12,14 @@
     <p> You must overcome this puzzle to become admin </p>
     <%- include("./partials/errors.ejs", {errors: errors}) %>
     <form action="/admin" method="POST">
-        <label for="code">Enter code</label>
-        <input id="code" name="code" type="text">
+        <p>
+            <label for="code">Enter code</label>
+            <input id="code" name="code" type="text">
+        </p>
         <button type="submit">Submit</button>
     </form>
+    <div class="links">
+        <a href="/">Back to home</a>
+    <div>
 </body>
 </html>

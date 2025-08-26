@@ -9,30 +9,42 @@
 <body>
     <h1><%= title %></h1>
     <% posts.forEach((post) => { %>
-        <div class="card">
-            <% if (locals.currentUser && locals.currentUser.ismember) { %>
-                <p>Author: <%= post.username %></p>
-                <p>Date posted: <%= post.date %></p>
-            <% } else { %>
-                <p>Author: ****** </p>
-                <p>Date posted: ****** </p>
-            <% } %>
-            <p><%= post.text %></p>
-            <% if (locals.currentUser && locals.currentUser.isadmin) { %>
-                <form action="/delete" method="post">
-                    <button name="id" value="<%=post.id%>" type="submit">Delete</button>
-                </form>
-            <% } %>
+        <div class="separator">
+            <div class="card">
+                <% if (locals.currentUser && locals.currentUser.ismember) { %>
+                    <p>Author: <%= post.username %></p>
+                    <p>Date posted: <%= post.date %></p>
+                <% } else { %>
+                    <p>Author: ****** </p>
+                    <p>Date posted: ****** </p>
+                <% } %>
+                <p><%= post.text %></p>
+                <% if (locals.currentUser && locals.currentUser.isadmin) { %>
+                    <form action="/delete" method="post" class="buttonform">
+                        <button name="id" value="<%=post.id%>" type="submit">Delete</button>
+                    </form>
+                <% } %>
+            </div>
         </div>
     <% }) %>
-    <% if (locals.currentUser) { %>
-        <a href="/create">Create post</a>
-        <a href="/logout">Log out</a>
-        <a href="/member">Become a member!</a>
-        <a href="/admin">Apply for admin</a>
-    <% } else { %>
-        <a href="/register">Register</a>
-        <a href="/login">Log in</a>
-    <% } %>
+    <div class="links">
+        <% if (locals.currentUser) { %>
+            <a href="/create">Create post</a>
+            <a href="/logout">Log out</a>
+            <% if (locals.currentUser.ismember) { %>
+                <p>You're already a member</p>
+            <% } else { %>
+                <a href="/member">Become a member!</a>
+            <% } %>
+            <% if (locals.currentUser.isadmin) { %>
+                <p>You're already admin</p>
+            <% } else { %>
+                <a href="/admin">Apply for admin</a>
+            <% } %>
+        <% } else { %>
+            <a href="/register">Register</a>
+            <a href="/login">Log in</a>
+        <% } %>
+    </div>
 </body>
 </html>
